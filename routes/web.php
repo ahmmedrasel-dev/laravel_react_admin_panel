@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::prefix('admin')->group(function () {
+    Route::get('/news', [NewsController::class, 'newsList'])->name('news-list');
+});
 
 Route::get('/news-dashboard', function () {
     return Inertia::render('NewsDashboard');
