@@ -138,21 +138,30 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
                             {/* <!-- Menu Item Dashboard --> */}
                             <SidebarLinkGroup
-                                activeCondition={pathname.includes("news-list")}
+                                activeCondition={
+                                    pathname.includes("news") ||
+                                    pathname.includes("create-news")
+                                }
                             >
                                 {(handleClick, open) => {
                                     return (
                                         <>
                                             <NavLink
                                                 href={`${route("news-list")}`}
-                                                active={route().current(
-                                                    "news-list",
-                                                )}
+                                                active={
+                                                    route().current(
+                                                        "news-list",
+                                                    ) ||
+                                                    route().current("news-add")
+                                                }
                                                 className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                                                     pathname.includes(
                                                         "admin/news",
+                                                    ) ||
+                                                    (pathname.includes(
+                                                        "create-news",
                                                     ) &&
-                                                    "bg-graydark dark:bg-meta-4"
+                                                        "bg-graydark dark:bg-meta-4")
                                                 }`}
                                                 onClick={(e) => {
                                                     e.preventDefault();
@@ -209,9 +218,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                             </NavLink>
                                             {/* <!-- Dropdown Menu Start --> */}
                                             <div
-                                                active={route().current(
-                                                    "news-list",
-                                                )}
                                                 className={`translate transform overflow-hidden ${
                                                     !open && "hidden"
                                                 }`}
@@ -220,6 +226,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                                     <li>
                                                         <NavLink
                                                             href={`${route("news-list")}`}
+                                                            active={route().current(
+                                                                "news-list",
+                                                            )}
                                                             className={({
                                                                 isActive,
                                                             }) =>
@@ -229,6 +238,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                                             }
                                                         >
                                                             News List
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink
+                                                            href={`${route("news-add")}`}
+                                                            active={route().current(
+                                                                "news-add",
+                                                            )}
+                                                            className={({
+                                                                isActive,
+                                                            }) =>
+                                                                "group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white " +
+                                                                (isActive &&
+                                                                    "!text-white")
+                                                            }
+                                                        >
+                                                            Add News
                                                         </NavLink>
                                                     </li>
                                                 </ul>
